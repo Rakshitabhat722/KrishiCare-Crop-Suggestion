@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>KrishiCare - Crop Suggestion</title>
+</head>
+<body>
+    <h2>Upload Soil Image</h2>
+    <form method="POST" action="/predict" enctype="multipart/form-data">
+        <input type="file" name="soilImage" required>
+        <input type="text" name="location" placeholder="Enter location">
+        <button type="submit">Predict Crop</button>
+    </form>
+
+    <h2>Or Enter Season</h2>
+    <form method="POST" action="/season">
+        <input type="text" name="season" placeholder="summer / rainy / winter" required>
+        <button type="submit">Get Crops</button>
+    </form>
+
+    {% if soil_type %}
+        <h3>Detected Soil Type: {{ soil_type }}</h3>
+    {% endif %}
+
+    {% if season %}
+        <h3>Crops for Season: {{ season }}</h3>
+    {% endif %}
+
+    {% if crops %}
+        <h3>Suitable Crops:</h3>
+        <ul>
+            {% for crop in crops %}
+                <li>{{ crop }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+</body>
+</html>
